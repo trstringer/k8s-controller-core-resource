@@ -4,7 +4,9 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-
+	filepath "path/filepath"
+	goruntime "runtime"
+	
 	log "github.com/Sirupsen/logrus"
 	api_v1 "k8s.io/api/core/v1"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -15,11 +17,22 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/workqueue"
 )
+// get user home directory depending on OS
+func userHomeDir() string {
+	if goruntime.GOOS == "windows" {
+		home := os.Getenv("HOMEDRIVE") + os.Getenv("HOMEPATH")
+		if home == "" {
+			home = os.Getenv("USERPROFILE")
+		}
+		return home
+	}
+	return os.Getenv("HOME")
+}
 
 // retrieve the Kubernetes cluster client from outside of the cluster
 func getKubernetesClient() kubernetes.Interface {
 	// construct the path to resolve to `~/.kube/config`
-	kubeConfigPath := os.Getenv("HOME") + "/.kube/config"
+	kubeConfigPath := filepath.Join(userHomeDir(), ".kube", "config")
 
 	// create the config from the path
 	config, err := clientcmd.BuildConfigFromFlags("", kubeConfigPath)
