@@ -8,7 +8,7 @@ An example of a custom Kubernetes controller that's only purpose is to watch for
 
 ## Running
 
-```
+```console
 $ git clone https://github.com/trstringer/k8s-controller-core-resource
 $ cd k8s-controller-core-resource
 $ go run *.go
@@ -18,7 +18,7 @@ $ go run *.go
 
 You are welcome to dump the resources themselves in handler but logging would be extremely verbose (and not interactive). I recommend you use a debugger...
 
-```
+```console
 $ dlv debug
 (dlv) b main.ObjectCreated
 (dlv) c
@@ -26,7 +26,7 @@ $ dlv debug
 
 You can then trigger an event by creating a deployment of nginx...
 
-```
+```console
 $ kubectl run nginx --image=nginx
 ```
 
