@@ -51,11 +51,11 @@ func main() {
 		&cache.ListWatch{
 			ListFunc: func(options meta_v1.ListOptions) (runtime.Object, error) {
 				// list all of the pods (core resource) in the deafult namespace
-				return client.CoreV1().Pods(meta_v1.NamespaceDefault).List(options)
+				return client.CoreV1().Pods(meta_v1.NamespaceDefault).List(context.TODO(), options)
 			},
 			WatchFunc: func(options meta_v1.ListOptions) (watch.Interface, error) {
 				// watch all of the pods (core resource) in the default namespace
-				return client.CoreV1().Pods(meta_v1.NamespaceDefault).Watch(options)
+				return client.CoreV1().Pods(meta_v1.NamespaceDefault).Watch(context.TODO(), options)
 			},
 		},
 		&api_v1.Pod{}, // the target type (Pod)
