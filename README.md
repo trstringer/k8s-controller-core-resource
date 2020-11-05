@@ -11,6 +11,7 @@ An example of a custom Kubernetes controller that's only purpose is to watch for
 ```
 $ git clone https://github.com/trstringer/k8s-controller-core-resource
 $ cd k8s-controller-core-resource
+$ go get github.com/Sirupsen/logrus k8s.io/api/core/v1 k8s.io/apimachinery/pkg/apis/meta/v1 k8s.io/apimachinery/pkg/runtime k8s.io/apimachinery/pkg/util/runtime k8s.io/apimachinery/pkg/util/wait k8s.io/apimachinery/pkg/watch k8s.io/client-go/kubernetes k8s.io/client-go/tools/cache k8s.io/client-go/tools/clientcmd k8s.io/client-go/util/workqueue
 $ go run *.go
 ```
 
